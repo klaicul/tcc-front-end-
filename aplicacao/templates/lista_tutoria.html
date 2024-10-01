@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de eletivas</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'ver_eletivas.css' %}">
+</head>
+<body>
+    <header class="topo">
+    
+        <div class="secondary-bar secondary-bar-top">
+            <div class="parallelogram parallelogram-1"></div>
+        </div>
+        <div class="blue-1"></div>
+        <div class="blue"></div>
+        <div class="triangulo"></div>
+        <div class="triangulo-2"></div>
+        <h1 class="topo-asn">EEEFM ANTONIO DOS SANTOS NEVES</h1>
+        <img class="logo" src="topo.png" alt="Logo">
+        <div class="blue-2"></div>
+        <div class="yellow-section">
+            <a class="inicio" href=""><i class="bi bi-house"></i>Inicio</a>
+        </div>
+    </header>
+    <div class="main-slide">
+      <div class="slide-container">
+        <div class="slide-content">
+            <div class="card-wrapper">
+                {% for tutoria in tutorias %}
+                <div class="card">
+                    <div class="image-content">
+                        <span class="overlay"></span>
+                        <div class="card-image">
+                            <img src="{{ tutoria.image.url }}" class="card-img">
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h2 class="name">{{ tutoria.title }}</h2>
+                        <p class="description">{{ tutoria.description }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}  
+        </div>
+      </div>
+    </div>
+
+</body>
+</html>

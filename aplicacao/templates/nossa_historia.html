@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% for historia in nossa_historia %}
+            <div class="card">
+                <div class="image-content">
+                    <span class="overlay"></span>
+                    <div class="card-image">
+                        <img src="{{ historia.imagem.url }}" class="card-img">
+                    </div>
+                </div>
+                <div class="card-content" style="font-family: Arial, Helvetica, sans-serif;">
+                    <h2 class="name">{{ historia.title }}</h2>
+                    <p class="sub-titulo">{{ historia.description }}</p>
+                </div>
+            </div>
+            {% endfor %} 
+</body>
+</html>

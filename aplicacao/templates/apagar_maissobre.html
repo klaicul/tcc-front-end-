@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apagar Eletiva</title>
+</head>
+<body>
+    <h1>Apagar Eletivas</h1>
+    <p>Tem certeza que deseja apagar a notícia "{{ mais.title }}"?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Confirmar</button>
+        <a href="{% url 'lista' %}">Cancelar</a>
+    </form>
+</body>
+</html>

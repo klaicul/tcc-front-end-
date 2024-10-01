@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+</head>
+<body>
+    <header class="topo">
+        <div class="secondary-bar secondary-bar-top">
+            <div class="parallelogram parallelogram-1"></div>
+        </div>
+        <div class="blue-1"></div>
+        <div class="blue"></div>
+        <div class="triangulo"></div>
+        <div class="triangulo-2"></div>
+        <h1 class="topo-asn">EEEFM ANTONIO DOS SANTOS NEVES</h1>
+        <img class="logo" src="https://images.sympla.com.br/65087b3baa195-lg.png" alt="Logo">
+        <div class="blue-2"></div>
+        <div class="yellow-section">
+            <button class="menu-icon" onclick="toggleMenu()">☰</button>
+            <div class="menu-container" id="menu">
+                <button class="close-icon" onclick="toggleMenu()">×</button>
+                <a href="{% url 'lista' %}">Eletivas</a>
+                <a href="{% url 'lista_tutoria' %}">Tutoria</a>
+                <a href="#">Horario</a>
+            </div>
+        </div>
+    </header>
+    <main>
+        {% block content %}
+        {% endblock content %}
+    </main>
+    
+</body>
+</html>
