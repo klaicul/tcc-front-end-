@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import ImageCarouselForm, EletivaForm, TutoriaForm, SocialLinksForm, MaisSobreForm, LinkEletivaForm, NossaHistoriaForm, NewsOneForm
-from .models import  ImgCarrossel, Eletiva, Tutoria, SocialLinks, ImageCarousel, MaisSobre, LinkEletiva, NossaHistoria, NewsOne
+from .forms import ImageCarouselForm, EletivaForm, TutoriaForm, SocialLinksForm, MaisSobreForm, LinkEletivaForm, NossaHistoriaForm, NewsOneForm, EventoForm
+from .models import  ImgCarrossel, Eletiva, Tutoria, SocialLinks, ImageCarousel, MaisSobre, LinkEletiva, NossaHistoria, NewsOne, Evento
 
 #Pagina inicial
 def home(request):
@@ -146,7 +146,45 @@ def apagar_maissobre(request, maissobre_id):
     return render(request, 'apagar_maissobre.html', {'maissobre': maissobre})
 
 
-# Calendário
+# Evento
+
+def criar_evento(request):
+    if request.method == 'POST':
+        form = EventoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('listar_eventos')  # redireciona para a página de eventos
+    else:
+        form = EventoForm()
+
+    return render(request, 'criar_evento.html', {'form': form})
+
+def listar_eventos(request):
+    eventos = Evento.objects.all()
+    return render(request, 'listar_eventos.html', {'eventos': eventos})
+
+def editar_evento(request, id):
+    evento = get_object_or_404(Evento, id=id)
+    
+    if request.method == 'POST':
+        form = EventoForm(request.POST, instance=evento)
+        if form.is_valid():
+            form.save()
+            return redirect('listar_eventos')  # Redireciona para a página de listagem de eventos após a edição
+    else:
+        form = EventoForm(instance=evento)
+    
+    return render(request, 'editar_evento.html', {'form': form, 'evento': evento})
+
+def apagar_evento(request, id):
+    evento = get_object_or_404(Evento, id=id)
+    
+    if request.method == 'POST':
+        evento.delete()
+        return redirect('listar_eventos')  # Redireciona para a página de listagem de eventos após a exclusão
+    
+    return render(request, 'apagar_evento.html', {'evento': evento})
+
 
 
 # Nossa história

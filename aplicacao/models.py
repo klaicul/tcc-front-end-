@@ -102,3 +102,12 @@ class NewsTwo(models.Model):
 
     def __str__(self):
         return self.title
+
+class Evento(models.Model):
+    nome = models.CharField(max_length=100)
+    descricao = models.TextField()
+    data = models.DateField()
+    hora = models.TimeField()
+
+    def __str__(self):
+        return self.nome
