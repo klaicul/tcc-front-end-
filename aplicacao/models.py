@@ -106,7 +106,7 @@ class NewsTwo(models.Model):
 class Evento(models.Model):
     nome = models.CharField(max_length=100)
     descricao = models.TextField()
-    data = models.DateField()
+    data = models.TextField(null=True)
     hora = models.TimeField()
 
     def __str__(self):
