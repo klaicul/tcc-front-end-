@@ -20,7 +20,7 @@ from django.conf.urls.static import static
 
 
 from django.urls import path
-from aplicacao.views import upload_image, home, add_carrossel, adicionar_eletivas, lista, apagar_eletivas, apagar_tutoria, adicionar_tutoria, lista_tutoria,view_eletivas,add_social_links,mais_sobre,adicionar_maissobre,apagar_maissobre, add_link_eletivas, apagar_link_eletivas, nossa_historia, add_historia, add_news_one, view_news_one, apagar_news_one, criar_evento, listar_eventos, editar_evento, apagar_evento
+from aplicacao.views import upload_image, home, add_carrossel, adicionar_eletivas, lista, apagar_eletivas, apagar_tutoria, adicionar_tutoria, lista_tutoria,view_eletivas,add_social_links,mais_sobre,adicionar_maissobre,apagar_maissobre, add_link_eletivas, apagar_link_eletivas, nossa_historia, add_historia, add_news_one, view_news_one, apagar_news_one, criar_evento, listar_eventos, editar_evento, apagar_evento, add_news_two, view_news_two, apagar_news_two
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -49,6 +49,9 @@ urlpatterns = [
     path('lista_eventos/', listar_eventos, name='listar_eventos'),
     path('editar/<int:id>/', editar_evento, name='editar_evento'),
     path('apagar/<int:id>/', apagar_evento, name='apagar_evento'),
+    path('add_news_two/', add_news_two, name='add_news_two'),
+    path('/<int:notidois_id>/', view_news_two, name='view_news_two'),
+    path('apagar_news_two/', apagar_news_two, name='apagar_news_two'),
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

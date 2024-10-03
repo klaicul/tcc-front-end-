@@ -97,7 +97,7 @@ class NewsTwo(models.Model):
     description = models.TextField()
     description_2 = models.TextField(null=True)
     image = models.ImageField(upload_to='news_images/')
-    date_published = models.DateTimeField(auto_now_add=True)
+    date = models.TextField(null=True)
 
 
     def __str__(self):

@@ -59,5 +59,24 @@
         {% endfor %} 
     </div>   
     {% endblock content %}
+
+
+    <!-- NOTÍCIA 2 -->
+ 
+    <div class="noticia">
+        {% for notidois in newstwo %}
+        <div class="main-news">
+            <img src="{{ notidois.image.url }}" alt="Main News">
+            <div class="main-news-content">
+                <h1 class="ti-1"><a href="{% url 'view_news_two' notidois.id %}">{{ notidois.title }}</a></h1>
+            </div>
+            <div class="date">
+                 <i class="bi bi-calendar-fill"></i>
+                 <span>{{ notidois.date }}</span>
+            </div>
+        </div>
+        {% endfor %} 
+    </div>   
+ 
 </body>
 </html>

@@ -1,13 +1,16 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import ImageCarouselForm, EletivaForm, TutoriaForm, SocialLinksForm, MaisSobreForm, LinkEletivaForm, NossaHistoriaForm, NewsOneForm, EventoForm
-from .models import  ImgCarrossel, Eletiva, Tutoria, SocialLinks, ImageCarousel, MaisSobre, LinkEletiva, NossaHistoria, NewsOne, Evento
+from .forms import ImageCarouselForm, EletivaForm, TutoriaForm, SocialLinksForm, MaisSobreForm, LinkEletivaForm, NossaHistoriaForm, NewsOneForm, EventoForm, NewsTwoForm
+from .models import  ImgCarrossel, Eletiva, Tutoria, SocialLinks, ImageCarousel, MaisSobre, LinkEletiva, NossaHistoria, NewsOne, Evento, NewsTwo
 
 #Pagina inicial
 def home(request):
     images = ImgCarrossel.objects.all().values()
     print(images)
     social_link = SocialLinks.objects.all().values()
-    return render(request, 'home.html', {'images': images,'social_link':social_link})
+    newsone = NewsOne.objects.all().order_by('-date_published')
+    newstwo = NewsTwo.objects.all().values()
+    return render(request, 'home.html', {'images': images,'social_link':social_link,  'newsone': newsone, 'newstwo': newstwo})
+
 
 
 def upload_image(request):
@@ -204,7 +207,7 @@ def add_historia(request):
     return render(request, 'add_historia.html', {'form': form})
 
 
-#NOTICIAS
+#NOTICIAS 1
 
 def add_news_one(request):
     if request.method == 'POST':
@@ -229,3 +232,26 @@ def apagar_news_one(request, noticia_id):
         newsone.delete()
         return redirect('home')
     return render(request, 'apagar_news_one.html', {'noticia': newsone})
+
+#NOTÍCIAS 2
+
+def add_news_two(request):
+    if request.method == 'POST':
+        form = NewsTwoForm (request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = NewsTwoForm()
+        return render(request, 'add_news_two.html', {'form': form})
+    
+def view_news_two(request, notidois_id):
+    newstwo = get_object_or_404(NewsTwo, pk=notidois_id)
+    return render(request, 'view_news_two.html', {'noticia': newstwo})
+
+def apagar_news_two(request, notidois_id):
+    newstwo = get_object_or_404(NewsTwo, pk=notidois_id)
+    if request.method == 'POST':
+        newstwo.delete()
+        return redirect('home')
+    return render(request, 'apagar_news_two.html', {'noticia': newstwo})
