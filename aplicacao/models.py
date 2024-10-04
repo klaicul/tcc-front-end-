@@ -92,16 +92,16 @@ class NewsOne(models.Model):
     def __str__(self):
         return self.title
 
-class NewsTwo(models.Model):
-    title = models.CharField(max_length=255)
-    description = models.TextField()
-    description_2 = models.TextField(null=True)
-    image = models.ImageField(upload_to='news_images/')
-    date = models.TextField(null=True)
-
+class Noticia2(models.Model):
+    titulo = models.CharField(max_length=200)
+    descricao1 = models.TextField()
+    descricao2 = models.TextField()
+    imagem = models.ImageField(upload_to='news_images/')
+    data_publicacao = models.DateField()
 
     def __str__(self):
-        return self.title
+        return self.titulo
+
 
 class Evento(models.Model):
     nome = models.CharField(max_length=100)

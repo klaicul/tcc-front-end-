@@ -58,25 +58,26 @@
         </div>
         {% endfor %} 
     </div>   
+     <!-- NOTÍCIA 2 -->
+ 
+     <ul>
+        {% for noticia in noticias %}
+            <li>
+                <h3>{{ noticia.titulo }}</h3>
+                <p>{{ noticia.descricao1 }}</p>
+                <p>{{ noticia.descricao2 }}</p>
+                <img src="{{ noticia.imagem.url }}" alt="Imagem da Notícia">
+                <p>Data de Publicação: {{ noticia.data_publicacao }}</p>
+                <a href="{% url 'editar_noticia' noticia.id %}">Editar</a> |
+                <a href="{% url 'apagar_noticia' noticia.id %}">Apagar</a>
+            </li>
+        {% endfor %}
+    </ul>
     {% endblock content %}
 
 
-    <!-- NOTÍCIA 2 -->
- 
-    <div class="noticia">
-        {% for notidois in newstwo %}
-        <div class="main-news">
-            <img src="{{ notidois.image.url }}" alt="Main News">
-            <div class="main-news-content">
-                <h1 class="ti-1"><a href="{% url 'view_news_two' notidois.id %}">{{ notidois.title }}</a></h1>
-            </div>
-            <div class="date">
-                 <i class="bi bi-calendar-fill"></i>
-                 <span>{{ notidois.date }}</span>
-            </div>
-        </div>
-        {% endfor %} 
-    </div>   
+   
+    
  
 </body>
 </html>

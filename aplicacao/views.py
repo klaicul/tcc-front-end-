@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import ImageCarouselForm, EletivaForm, TutoriaForm, SocialLinksForm, MaisSobreForm, LinkEletivaForm, NossaHistoriaForm, NewsOneForm, EventoForm, NewsTwoForm
-from .models import  ImgCarrossel, Eletiva, Tutoria, SocialLinks, ImageCarousel, MaisSobre, LinkEletiva, NossaHistoria, NewsOne, Evento, NewsTwo
+from .forms import ImageCarouselForm, EletivaForm, TutoriaForm, SocialLinksForm, MaisSobreForm, LinkEletivaForm, NossaHistoriaForm, NewsOneForm, EventoForm, Noticia2Form
+from .models import  ImgCarrossel, Eletiva, Tutoria, SocialLinks, ImageCarousel, MaisSobre, LinkEletiva, NossaHistoria, NewsOne, Evento, Noticia2
 
 #Pagina inicial
 def home(request):
@@ -8,8 +8,8 @@ def home(request):
     print(images)
     social_link = SocialLinks.objects.all().values()
     newsone = NewsOne.objects.all().order_by('-date_published')
-    newstwo = NewsTwo.objects.all().values()
-    return render(request, 'home.html', {'images': images,'social_link':social_link,  'newsone': newsone, 'newstwo': newstwo})
+    noticias = Noticia2.objects.all()
+    return render(request, 'home.html', {'images': images,'social_link':social_link,  'newsone': newsone, 'noticias': noticias})
 
 
 
@@ -232,26 +232,31 @@ def apagar_news_one(request, noticia_id):
         newsone.delete()
         return redirect('home')
     return render(request, 'apagar_news_one.html', {'noticia': newsone})
-
-#NOTÍCIAS 2
-
-def add_news_two(request):
+# NOTICIA 2
+def adicionar_noticia(request):
     if request.method == 'POST':
-        form = NewsTwoForm (request.POST, request.FILES)
+        form = Noticia2Form(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('home')
     else:
-        form = NewsTwoForm()
-        return render(request, 'add_news_two.html', {'form': form})
-    
-def view_news_two(request, notidois_id):
-    newstwo = get_object_or_404(NewsTwo, pk=notidois_id)
-    return render(request, 'view_news_two.html', {'noticia': newstwo})
+        form = Noticia2Form()
+    return render(request, 'noticias/adicionar_noticia.html', {'form': form})
 
-def apagar_news_two(request, notidois_id):
-    newstwo = get_object_or_404(NewsTwo, pk=notidois_id)
+def editar_noticia(request, id):
+    noticia = get_object_or_404(Noticia2, id=id)
     if request.method == 'POST':
-        newstwo.delete()
+        form = Noticia2Form(request.POST, request.FILES, instance=noticia)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = Noticia2Form(instance=noticia)
+    return render(request, 'noticias/editar_noticia.html', {'form': form, 'noticia': noticia})
+
+def apagar_noticia(request, id):
+    noticia = get_object_or_404(Noticia2, id=id)
+    if request.method == 'POST':
+        noticia.delete()
         return redirect('home')
-    return render(request, 'apagar_news_two.html', {'noticia': newstwo})
+    return render(request, 'noticias/apagar_noticia.html', {'noticia': noticia})
