@@ -43,7 +43,7 @@ class LinkEletivaForm(forms.ModelForm):
 class NossaHistoriaForm(forms.ModelForm):
     class Meta:
         model = NossaHistoria
-        fields = ['title', 'description', 'image']
+        fields = ['title', 'data_publicacao', 'image']
         
         
 class NewsOneForm(forms.ModelForm):

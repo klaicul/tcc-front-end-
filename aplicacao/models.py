@@ -75,7 +75,7 @@ class MaisSobre(models.Model):
 
 class NossaHistoria(models.Model):
     title = models.CharField(max_length=100)
-    description = models.TextField()
+    data_publicacao = models.DateField(null=True)
     image = models.ImageField(upload_to='tutoria_images/', null=True)
     
     def __str__(self):

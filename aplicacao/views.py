@@ -194,7 +194,7 @@ def apagar_evento(request, id):
 
 def nossa_historia(request):
     nossa_historia = NossaHistoria.objects.all()
-    return render(request, 'nossa_historia.html', {'nossa_historia': nossa_historia})
+    return render(request, 'historia/nossa_historia.html', {'nossa_historia': nossa_historia})
 
 def add_historia(request):
     if request.method == 'POST':
@@ -204,7 +204,7 @@ def add_historia(request):
             return redirect('nossa_historia')
     else:
         form = NossaHistoriaForm()
-    return render(request, 'add_historia.html', {'form': form})
+    return render(request, 'historia/add_historia.html', {'form': form})
 
 
 #NOTICIAS 1
